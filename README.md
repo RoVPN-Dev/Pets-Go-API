@@ -1,4 +1,15 @@
-# Pets-Go-API
-Holds information about the Pets Go player upgrade tree. All script credit goes to BIG Games. This repo is purely made for transparency, do not use this information in a way that will violate Roblox TOS.
+import requests
 
-This information was found in-game. All information provided is accurate as of release. If you believe something has changed and would like to reach out, you may join .gg/pets-go and message the owner.
+# URL of the JSON data
+url = 'https://ps99-economy-bucket.s3.us-west-1.amazonaws.com/data_rng.json'
+
+# Fetch the data from the URL
+response = requests.get(url)
+data = response.json()
+
+# Convert JSON data into the desired list format
+formatted_list = [f"{item[1]['id']} / {item[2]}" for item in data]
+
+# Display the formatted list
+for entry in formatted_list:
+    print(entry)
