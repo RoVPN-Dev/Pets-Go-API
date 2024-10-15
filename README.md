@@ -1,15 +1,21 @@
-import requests
+// Example data to simulate the response from your API
+let responseData = [
+    ["Pet", {"id": "Banana"}, 30000000.0], 
+    ["Pet", {"id": "Diamond Dragon"}, 8573583.996],
+    ["Pet", {"id": "Holographic Cat"}, 3060535.173],
+    ["Pet", {"id": "Hippomelon"}, 16721542.364],
+    ["Pet", {"id": "Arcane Cat"}, 6395567]
+];
 
-# URL of the JSON data
-url = 'https://ps99-economy-bucket.s3.us-west-1.amazonaws.com/data_rng.json'
+// Loop through each item in the response and format it properly
+responseData.forEach(item => {
+    // Extract the pet name and cost
+    let name = item[1].id; // Getting the pet name
+    let cost = item[2]; // Getting the pet cost
 
-# Fetch the data from the URL
-response = requests.get(url)
-data = response.json()
+    // Format the cost to have 'M' for millions
+    let formattedCost = cost >= 1000000 ? `${(cost / 1000000).toFixed(0)}M` : cost;
 
-# Convert JSON data into the desired list format
-formatted_list = [f"{item[1]['id']} / {item[2]}" for item in data]
-
-# Display the formatted list
-for entry in formatted_list:
-    print(entry)
+    // Log the formatted output to the console
+    console.log(`**Name:** ${name}\n**Cost:** ${formattedCost}`);
+});
